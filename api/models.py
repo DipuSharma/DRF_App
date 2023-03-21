@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 company_type_choice = (('', ''), ('IT', 'IT'), ('Non IT', 'Non IT'), ('Govt','Goverment'), ('Institute', 'Institute'))
@@ -13,6 +14,7 @@ class Company(models.Model):
     type = models.CharField(max_length=100, choices=company_type_choice)
     data = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.name +  ' -- ' + self.zip_code   # Show One2Many field relation name and zipcode 
