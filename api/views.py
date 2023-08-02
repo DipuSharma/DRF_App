@@ -3,8 +3,8 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from api.models import Company, Employee
-from api.serializers import UserSerializer, CompanySerializer, EmployeeSerializer
+from api.models import Company, Employee, DrugGroup, Product
+from api.serializers import UserSerializer, CompanySerializer, EmployeeSerializer, DrugGroupSerializer, ProductSerializer
 
 
 # Create your views here.
@@ -22,18 +22,6 @@ class UserViewset(viewsets.ModelViewSet):
             return Response(com_serializer.data)
         except Exception as e:
             return Response({'message': 'Opps!! User not exists'})
-
-    def employees(self, request, pk=None):
-        print("Company Id____________________", pk)
-        # try:
-        #     company = Company.objects.get(pk=pk)
-        #     employee = Employee.objects.filter(company=company)
-        #     emp_serializer = EmployeeSerializer(employee, many=True, context={'request':request})
-        #     return Response(emp_serializer.data)
-        # except Exception as e:
-        #     return Response(
-        #        { 'message': 'Oops Company not exists!!'}
-        #     )
 
 
 class CompanyViewset(viewsets.ModelViewSet):
@@ -57,3 +45,11 @@ class CompanyViewset(viewsets.ModelViewSet):
 class EmployeeViewset(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+
+class DrugGroupViewsets(viewsets.ModelViewSet):
+    queryset = DrugGroup.objects.all()
+    serializer_class = DrugGroupSerializer
+
+class ProductViewsets(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer

@@ -41,3 +41,29 @@ class Employee(models.Model):
     
     def __str__(self):
         return self.name 
+
+class DrugGroup(models.Model):
+    drugroup_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+    prescription = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Product(models.Model):
+    product_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50, )
+    prescription = models.CharField(max_length=200)
+    batch = models.CharField(max_length=100, )
+    rac_no = models.CharField(max_length=100, )
+    quantity = models.FloatField(max_length=5, )
+    mrp = models.FloatField(max_length=20)
+    mfg_date = models.DateField(max_length=100)
+    exp_date = models.DateField(max_length=100)
+    date = models.DateTimeField(auto_now=True)
+    grade = models.CharField(max_length=50, choices=employee_grade)
+    drug_group = models.ForeignKey(DrugGroup, on_delete=models.CASCADE) # one2 many relationship django 
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)  # One2Many Relationship Django
+    
+    def __str__(self):
+        return self.name 
